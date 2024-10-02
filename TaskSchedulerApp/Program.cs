@@ -181,12 +181,12 @@ foreach (User u in users)
 //todoListRepository.DeleteById(id);
 
 //Console.Write("Deal id: ");
-//id = Convert.ToInt32(Console.ReadLine());
+//int id = Convert.ToInt32(Console.ReadLine());
 //dealRepository.DeleteById(id);
 
-//Console.Write("User name: ");
-//string name = Console.ReadLine();
-//userRepository.DeleteByName(name);
+Console.Write("User name: ");
+string name = Console.ReadLine();
+userRepository.DeleteByName(name);
 
 foreach (User u in users)
 {

@@ -8,7 +8,7 @@ using TaskSchedulerApp.Model;
 namespace TaskSchedulerApp.Repository
 {
     // IItemRepository - интерфейс сервиса для выполнения операций с сущностями Item
-    internal interface IItemRepository
+    public interface IItemRepository
     {
         // добавление новой записи
         public Item Add(Item item);

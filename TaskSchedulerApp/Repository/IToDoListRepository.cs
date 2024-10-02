@@ -8,7 +8,7 @@ using TaskSchedulerApp.Model;
 namespace TaskSchedulerApp.Repository
 {
     // ITodoListRepository - интерфейс сервиса для выполнения операций с сущностями ToDoList
-    internal interface ITodoListRepository
+    public interface ITodoListRepository
     {
         // добавление новой записи
         public ToDoList Add(ToDoList todo);

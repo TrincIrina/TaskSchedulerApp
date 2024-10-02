@@ -13,20 +13,16 @@ namespace TaskSchedulerApp.Repository
         // добавление новой записи
         public Item Add(Item item)
         {
-            using (ApplicationDbContext db = new())
-            {
-                db.Items.Add(item);
-                db.SaveChanges();
-                return item;
-            }
+            using ApplicationDbContext db = new();
+            db.Items.Add(item);
+            db.SaveChanges();
+            return item;
         }
         // получение записи по id
         public Item? GetById(int id)
         {
-            using (ApplicationDbContext db = new())
-            {
-                return db.Items.FirstOrDefault(item => item.Id == id);
-            }
+            using ApplicationDbContext db = new();
+            return db.Items.FirstOrDefault(item => item.Id == id);
         }
         // удаление записи по id
         public Item? DeleteById(int id)
@@ -34,45 +30,39 @@ namespace TaskSchedulerApp.Repository
             Item? deletedItem = GetById(id);
             if (deletedItem != null)
             {
-                using (ApplicationDbContext db = new())
-                {
-                    db.Items.Remove(deletedItem);
-                    db.SaveChanges();
-                }
+                using ApplicationDbContext db = new();
+                db.Items.Remove(deletedItem);
+                db.SaveChanges();
             }
             return deletedItem;
         }
         // получение одного чек-листа (всех записей с одинаковым вторичным ключём)
         public List<Item> ListAllByDeal(int DealId)
         {
-            using (ApplicationDbContext db = new())
+            using ApplicationDbContext db = new();
+            List<Item> list = new();
+            List<Item> items = db.Items.ToList();
+            foreach (Item item in items)
             {
-                List<Item> list = new();
-                List<Item> items = db.Items.ToList();
-                foreach (Item item in items)
+                if (item.DealId == DealId)
                 {
-                    if (item.DealId == DealId)
-                    {
-                        list.Add(item);
-                    }
+                    list.Add(item);
                 }
-                return list;
             }
+            return list;
         }
         // обновление записи
         public Item? Update(Item item)
         {
-            using (ApplicationDbContext db = new())
+            using ApplicationDbContext db = new();
+            Item? updatedItem = db.Items.FirstOrDefault(it => it.Id == item.Id);
+            if (updatedItem != null)
             {
-                Item? updatedItem = db.Items.FirstOrDefault(it => it.Id == item.Id);
-                if (updatedItem != null)
-                {
-                    updatedItem.Description = item.Description;
-                    updatedItem.DealId = item.DealId;
-                    db.SaveChanges();
-                }
-                return updatedItem;
+                updatedItem.Description = item.Description;
+                updatedItem.DealId = item.DealId;
+                db.SaveChanges();
             }
+            return updatedItem;
         }
     }
 }

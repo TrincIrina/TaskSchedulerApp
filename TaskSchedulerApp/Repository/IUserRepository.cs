@@ -8,7 +8,7 @@ using TaskSchedulerApp.Model;
 namespace TaskSchedulerApp.Repository
 {
     // IUserRepository - интерфейс сервиса для выполнения операций с сущностями User
-    internal interface IUserRepository
+    public interface IUserRepository
     {
         // добавление нового пользователя
         public User Add(User user);

@@ -8,7 +8,7 @@ using TaskSchedulerApp.Model;
 namespace TaskSchedulerApp.Repository
 {
     // IDealRepository - интерфейс сервиса для выполнения операций с сущностями Deal
-    internal interface IDealRepository
+    public interface IDealRepository
     {
         // добавление новой записи
         public Deal Add(Deal deal);

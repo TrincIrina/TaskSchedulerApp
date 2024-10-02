@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TaskSchedulerApp.Model
 {
-    internal class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : DbContext
     {
         public DbSet<User> Users { get; set; } 
         public DbSet<ToDoList> ToDoLists { get; set; }

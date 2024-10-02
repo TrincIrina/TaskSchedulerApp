@@ -42,14 +42,7 @@ namespace TaskSchedulerApp.Repository
             Deal? deletedDeal = GetById(id);
             if (deletedDeal != null)
             {
-                using ApplicationDbContext db = new();
-                if (deletedDeal.Items!.Count > 0)
-                {
-                    foreach (Item item in deletedDeal.Items)
-                    {
-                        db.Items.Remove(item);
-                    }
-                }
+                using ApplicationDbContext db = new();                
                 db.Deals.Remove(deletedDeal);
                 db.SaveChanges();
             }

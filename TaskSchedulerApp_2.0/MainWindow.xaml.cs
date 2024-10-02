@@ -8,6 +8,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TaskSchedulerApp.Model;
+using TaskSchedulerApp.Repository;
 
 namespace TaskSchedulerApp_2._0
 {
@@ -16,9 +18,15 @@ namespace TaskSchedulerApp_2._0
     /// </summary>
     public partial class MainWindow : Window
     {
+        public IUserRepository userRepository = new UserService();
+        public ITodoListRepository todoListRepository = new TodoService();
+        public IDealRepository dealRepository = new DealService();
+        public IItemRepository itemRepository = new ItemService();
         public MainWindow()
         {
             InitializeComponent();
+
+            
         }
     }
 }

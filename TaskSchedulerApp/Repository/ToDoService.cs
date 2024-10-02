@@ -13,43 +13,35 @@ namespace TaskSchedulerApp.Repository
         // добавление новой записи
         public ToDoList Add(ToDoList todo)
         {
-            using (ApplicationDbContext db = new())
-            {
-                db.ToDoLists.Add(todo);
-                db.SaveChanges();
-                return todo;
-            }
+            using ApplicationDbContext db = new();
+            db.ToDoLists.Add(todo);
+            db.SaveChanges();
+            return todo;
         }
         // получение всех записей одного пользователя
         public List<ToDoList> ListAllByUser(string login)
         {
-            using (ApplicationDbContext db = new())
+            using ApplicationDbContext db = new();
+            User? user = db.Users.FirstOrDefault(u => u.Login == login);
+            if (user == null)
             {
-                User? user = db.Users.FirstOrDefault(u => u.Login == login);
-                if (user == null)
-                {
-                    return new List<ToDoList>();
-                }                
-                List<ToDoList> list = db.ToDoLists.Where(tl => tl.UserId == user.Id).ToList();
-                return list;
+                return new List<ToDoList>();
             }
+            List<ToDoList> list = db.ToDoLists.Where(tl => tl.UserId == user.Id).ToList();
+            return list;
         }
 
         // получение записи по id
         public ToDoList? GetById(int id)
         {
-            using (ApplicationDbContext db = new())
-            {
-                return db.ToDoLists.FirstOrDefault(todo => todo.Id == id);
-            }
+            using ApplicationDbContext db = new();
+            return db.ToDoLists.FirstOrDefault(todo => todo.Id == id);
         }
         // получение записи по имени
         public ToDoList? GetByName(string title)
         {
-            using (ApplicationDbContext db = new())
-            {
-                return db.ToDoLists.FirstOrDefault(todo => todo.Title == title);
-            }
+            using ApplicationDbContext db = new();
+            return db.ToDoLists.FirstOrDefault(todo => todo.Title == title);
         }
 
         // удаление записи
@@ -58,18 +50,9 @@ namespace TaskSchedulerApp.Repository
             ToDoList? deletedTodo = GetById(id);
             if (deletedTodo != null)
             {
-                using (ApplicationDbContext db = new())
-                {
-                    if (deletedTodo.Deals!.Count > 0)
-                    {
-                        foreach (var deal in deletedTodo.Deals)
-                        {
-                            db.Deals.Remove(deal);
-                        }
-                    }
-                    db.ToDoLists.Remove(deletedTodo);
-                    db.SaveChanges();
-                }
+                using ApplicationDbContext db = new();
+                db.ToDoLists.Remove(deletedTodo);
+                db.SaveChanges();
             }
             return deletedTodo;
         }
@@ -77,16 +60,14 @@ namespace TaskSchedulerApp.Repository
         // обновление записи
         public ToDoList? Update(ToDoList toDoList)
         {
-            using (ApplicationDbContext db = new())
+            using ApplicationDbContext db = new();
+            ToDoList? updatedTodo = db.ToDoLists.FirstOrDefault(todo => todo.Id == toDoList.Id);
+            if (updatedTodo != null)
             {
-                ToDoList? updatedTodo = db.ToDoLists.FirstOrDefault(todo => todo.Id == toDoList.Id);
-                if (updatedTodo != null)
-                {
-                    updatedTodo.Title = toDoList.Title;
-                    db.SaveChanges();
-                }
-                return updatedTodo;
+                updatedTodo.Title = toDoList.Title;
+                db.SaveChanges();
             }
+            return updatedTodo;
         }
     }
 }
