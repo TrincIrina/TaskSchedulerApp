@@ -21,7 +21,7 @@ namespace TaskSchedulerApp.Repository
             }
         }
         // получение всех записей одного пользователя
-        public List<ToDoList> ListAll(string login)
+        public List<ToDoList> ListAllByUser(string login)
         {
             using (ApplicationDbContext db = new())
             {
@@ -36,6 +36,14 @@ namespace TaskSchedulerApp.Repository
         }
 
         // получение записи по id
+        public ToDoList? GetById(int id)
+        {
+            using (ApplicationDbContext db = new())
+            {
+                return db.ToDoLists.FirstOrDefault(todo => todo.Id == id);
+            }
+        }
+        // получение записи по имени
         public ToDoList? GetByName(string title)
         {
             using (ApplicationDbContext db = new())
@@ -44,14 +52,21 @@ namespace TaskSchedulerApp.Repository
             }
         }
 
-        // удаление записи по id
-        public ToDoList? DeleteByName(string title)
+        // удаление записи
+        public ToDoList? DeleteById(int id)
         {
-            ToDoList? deletedTodo = GetByName(title);
+            ToDoList? deletedTodo = GetById(id);
             if (deletedTodo != null)
             {
                 using (ApplicationDbContext db = new())
                 {
+                    if (deletedTodo.Deals!.Count > 0)
+                    {
+                        foreach (var deal in deletedTodo.Deals)
+                        {
+                            db.Deals.Remove(deal);
+                        }
+                    }
                     db.ToDoLists.Remove(deletedTodo);
                     db.SaveChanges();
                 }
@@ -60,14 +75,14 @@ namespace TaskSchedulerApp.Repository
         }
 
         // обновление записи
-        public ToDoList? Update(string oldTitle, string newTitle)
+        public ToDoList? Update(ToDoList toDoList)
         {
             using (ApplicationDbContext db = new())
             {
-                ToDoList? updatedTodo = db.ToDoLists.FirstOrDefault(todo => todo.Title == oldTitle);
+                ToDoList? updatedTodo = db.ToDoLists.FirstOrDefault(todo => todo.Id == toDoList.Id);
                 if (updatedTodo != null)
                 {
-                    updatedTodo.Title = newTitle;
+                    updatedTodo.Title = toDoList.Title;
                     db.SaveChanges();
                 }
                 return updatedTodo;

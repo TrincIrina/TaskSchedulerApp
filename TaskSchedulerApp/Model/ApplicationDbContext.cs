@@ -13,11 +13,7 @@ namespace TaskSchedulerApp.Model
         public DbSet<ToDoList> ToDoLists { get; set; }
         public DbSet<Deal> Deals { get; set; }
         public DbSet<Item> Items { get; set; }
-        //public ApplicationDbContext()
-        //{
-        //    Database.EnsureDeleted(); // гарантируем, что бд удалена
-        //    Database.EnsureCreated(); // гарантируем, что бд будет создана
-        //}
+        
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
             string connectionString = @"

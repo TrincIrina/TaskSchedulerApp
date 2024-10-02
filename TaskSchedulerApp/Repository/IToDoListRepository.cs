@@ -13,12 +13,14 @@ namespace TaskSchedulerApp.Repository
         // добавление новой записи
         public ToDoList Add(ToDoList todo);
         // получение записей одного пользователя
-        public List<ToDoList> ListAll(string login);
+        public List<ToDoList> ListAllByUser(string login);
         // получение записи по id
+        public ToDoList? GetById(int id);
+        // получение записи по имени
         public ToDoList? GetByName(string title);
-        // удаление записи по id
-        public ToDoList? DeleteByName(string title);
+        // удаление записи
+        public ToDoList? DeleteById(int id);
         // обновление записи
-        public ToDoList? Update(string oldTitle, string newTitle);
+        public ToDoList? Update(ToDoList toDoList);
     }
 }

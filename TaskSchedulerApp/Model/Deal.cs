@@ -26,7 +26,7 @@ namespace TaskSchedulerApp.Model
         }
         public override string ToString()
         {
-            return $"{Name}. {Priority} - {DateCreation.ToShortDateString} - {Deadline.ToShortDateString}/";
+            return $"{Name}. {Priority} - {DateCreation} - {Deadline}";
         }
     }
 }

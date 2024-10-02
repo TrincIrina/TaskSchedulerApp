@@ -13,11 +13,11 @@ namespace TaskSchedulerApp.Repository
         // добавление новой записи
         public Deal Add(Deal deal);
         // получение записи по id
-        public Deal? GetByName(string name);
+        public Deal? GetById(int id);
         // получение одного списка дел (всех записей с одинаковым вторичным ключём)
         public List<Deal> ListAllByToDoList(string title);
         // удаление записи по id
-        public Deal? DeleteByName(string name);
+        public Deal? DeleteById(int id);
         // обновление записи
         public Deal? Update(Deal deal);
     }
