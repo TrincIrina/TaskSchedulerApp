@@ -30,7 +30,7 @@
             <StackPanel Orientation="Vertical" Width="320">
                 <TextBox x:Name="LoginTextBox" Margin="10" Style="{StaticResource FontStyle}"
                     Height="30" Width="300"/>
-                <TextBox x:Name="PasswordTextBox" Margin="10" Style="{StaticResource FontStyle}"
+                <PasswordBox x:Name="PasswordBox" Margin="10" Style="{StaticResource FontStyle}"
                     Height="30" Width="300"/>
             </StackPanel>            
         </StackPanel>        

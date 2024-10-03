@@ -32,15 +32,15 @@
             <StackPanel Orientation="Vertical" Width="350" >
                 <TextBox x:Name="LoginTextBox" Style="{StaticResource FontStyle}"
                     Height="30" Width="330" Margin="5"/>
-                <TextBox x:Name="PasswordTextBox" Style="{StaticResource FontStyle}"
+                <PasswordBox x:Name="PasswordBox" Style="{StaticResource FontStyle}"
                     Height="30" Width="330" Margin="5"/>
-                <TextBox x:Name="ReplayPasswordTextBox" Style="{StaticResource FontStyle}"
+                <PasswordBox x:Name="ReplayPasswordBox" Style="{StaticResource FontStyle}"
                     Height="30" Width="330" Margin="5"/>
             </StackPanel>           
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
             <Button x:Name="RegistrationButton" Content="зарегестрироваться" Margin="10"
-                Style="{StaticResource HeightWidthButton}"/>
+                Style="{StaticResource HeightWidthButton}" Click="RegistrationButton_Click"/>
             <Button x:Name="СancelButton" Content="отмена" Margin="10"
                 Style="{StaticResource HeightWidthButton}" Click="СancelButton_Click"/>
         </StackPanel>

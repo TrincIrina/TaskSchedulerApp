@@ -23,10 +23,7 @@ namespace TaskSchedulerApp_2._0
     
     public partial class EnterWindow : Window
     {
-        public IUserRepository userRepository = new UserService();
-        public ITodoListRepository todoListRepository = new TodoService();
-        public IDealRepository dealRepository = new DealService();
-        public IItemRepository itemRepository = new ItemService();
+        public IUserRepository userRepository = new UserService();        
 
         public EnterWindow()
         {
@@ -40,7 +37,24 @@ namespace TaskSchedulerApp_2._0
 
         private void EnterButton_Click(object sender, RoutedEventArgs e)
         {
-
+            string login = LoginTextBox.Text;
+            string password = PasswordBox.Password;
+            if (userRepository.FindByName(login) != null)
+            {
+                if (userRepository.FindByName(login).Password == password)
+                {
+                    ToDoListsWindow toDoListsWindow = new ToDoListsWindow(login);
+                    this.Hide();
+                    toDoListsWindow.ShowDialog();
+                    this.Show();
+                } else
+                {
+                    MessageBox.Show("Неверный пароль");
+                }
+            } else
+            {
+                MessageBox.Show("Пользователь не найден");
+            }
         }
     }
 }

@@ -36,5 +36,28 @@ namespace TaskSchedulerApp_2._0
         {
             Close();
         }
+
+        private void RegistrationButton_Click(object sender, RoutedEventArgs e)
+        {
+            string login = LoginTextBox.Text;
+            string password = PasswordBox.Password;
+            if (password == ReplayPasswordBox.Password)
+            {
+                User user = new User()
+                {
+                    Login = login,
+                    Password = password
+                };
+                userRepository.Add(user);
+                MessageBox.Show("Регистрация прошла успешно");
+                ToDoListsWindow toDoListsWindow = new ToDoListsWindow(login);
+                this.Hide();
+                toDoListsWindow.ShowDialog();
+                this.Show();
+            } else
+            {
+                MessageBox.Show("Неверно ввели пароль");
+            }
+        }
     }
 }
