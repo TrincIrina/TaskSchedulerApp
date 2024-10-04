@@ -25,7 +25,7 @@ namespace TaskSchedulerApp.Repository
             User? user = db.Users.FirstOrDefault(u => u.Login == login);
             if (user == null)
             {
-                return new List<ToDoList>();
+                return new();
             }
             List<ToDoList> list = db.ToDoLists.Where(tl => tl.UserId == user.Id).ToList();
             return list;

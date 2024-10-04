@@ -21,17 +21,18 @@ namespace TaskSchedulerApp_2._0
     /// </summary>
     public partial class ToDoListsWindow : Window
     {
-        public IUserRepository userRepository = new UserService();
-        public ITodoListRepository todoListRepository = new TodoService();        
-        public User? user = new User();
-        
+        private readonly IUserRepository userRepository = new UserService();
+        private readonly ITodoListRepository todoListRepository = new TodoService();        
+        private User? user = new();
+        private string title = null!;
+        private List<ToDoList> list = new();
         public ToDoListsWindow(string login)
         {
             InitializeComponent();
 
             user = userRepository.FindByName(login);
-            Greeting();            
-            ToDoListsListBox.ItemsSource = todoListRepository.ListAllByUser(user.Login);
+            Greeting();
+            ToDoListBox.ItemsSource = todoListRepository.ListAllByUser(user.Login);
         }
         // Вспомогательный метод для вывода приветствия
         private void Greeting()
@@ -51,7 +52,7 @@ namespace TaskSchedulerApp_2._0
                 GreetingLabel.Content = "Доброй ночи, " + user.Login + "!";
             }
         }
-
+        
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show(
@@ -61,6 +62,89 @@ namespace TaskSchedulerApp_2._0
             if (result == MessageBoxResult.Yes)
             {
                 Close();
+            }
+        }
+
+        private void AddListButton_Click(object sender, RoutedEventArgs e)
+        {
+            title = ToDoListTextBox.Text;
+            if (title == null)
+            {
+                MessageBox.Show("Введите название списка");
+            }
+            ToDoList list = new()
+            {
+                Title = title,
+                UserId = user.Id
+            };
+            todoListRepository.Add(list);
+            ToDoListTextBox.Clear();
+            ToDoListBox.ItemsSource = todoListRepository.ListAllByUser(user.Login);
+            title = null!;
+        }
+
+        private void DeleteListButton_Click(object sender, RoutedEventArgs e)
+        {
+            title = ToDoListBox.SelectedItem.ToString();
+            if (title == null!)
+            {
+                MessageBox.Show("Выберите список для удаления");
+            }
+            else
+            {
+                int id = todoListRepository.GetByName(title).Id;
+                todoListRepository.DeleteById(id);                
+                ToDoListBox.ItemsSource = todoListRepository.ListAllByUser(user.Login);
+                title = null!;
+            }            
+        }
+
+        private void EditListButton_Click(object sender, RoutedEventArgs e)
+        {
+            title = ToDoListBox.SelectedItem.ToString();
+            if (title == null!)
+            {
+                MessageBox.Show("Выберите список для редактирования");
+            }
+            else
+            {
+                int id = todoListRepository.GetByName(title).Id;
+                title = null!;
+                title = ToDoListTextBox.Text;
+                if (title == null)
+                {
+                    MessageBox.Show("Введите название списка");
+                }
+                else
+                {
+                    ToDoList todo = new()
+                    {
+                        Id = id,
+                        Title = title,
+                        UserId = user.Id
+                    };
+                    todoListRepository.Update(todo);
+                    ToDoListBox.ItemsSource = todoListRepository.ListAllByUser(user.Login);
+                    ToDoListTextBox.Clear();
+                    title = null!;
+                }
+            }
+        }
+
+        private void OpenListButton_Click(object sender, RoutedEventArgs e)
+        {
+            title = ToDoListBox.SelectedItem.ToString();
+            if (title == null)
+            {
+                MessageBox.Show("Выберите список");
+            }
+            else
+            {
+                DealsWindow dealsWindow = new DealsWindow(title);
+                this.Hide();
+                dealsWindow.ShowDialog();
+                this.Show();
+                title = null!;
             }
         }
     }
