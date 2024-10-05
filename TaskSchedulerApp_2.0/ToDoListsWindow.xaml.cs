@@ -25,7 +25,7 @@ namespace TaskSchedulerApp_2._0
         private readonly ITodoListRepository todoListRepository = new TodoService();        
         private User? user = new();
         private string title = null!;
-        private List<ToDoList> list = new();
+        
         public ToDoListsWindow(string login)
         {
             InitializeComponent();
@@ -133,18 +133,25 @@ namespace TaskSchedulerApp_2._0
 
         private void OpenListButton_Click(object sender, RoutedEventArgs e)
         {
-            title = ToDoListBox.SelectedItem.ToString();
-            if (title == null)
+            if (ToDoListBox.ItemsSource == null)
             {
-                MessageBox.Show("Выберите список");
+                MessageBox.Show("Список задач пуст");
             }
             else
             {
-                DealsWindow dealsWindow = new DealsWindow(title);
-                this.Hide();
-                dealsWindow.ShowDialog();
-                this.Show();
-                title = null!;
+                title = ToDoListBox.SelectedItem.ToString();
+                if (title == null)
+                {
+                    MessageBox.Show("Выберите список");
+                }
+                else
+                {
+                    DealsWindow dealsWindow = new(title);
+                    this.Hide();
+                    dealsWindow.ShowDialog();
+                    this.Show();
+                    title = null!;
+                }
             }
         }
     }

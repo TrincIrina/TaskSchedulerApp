@@ -23,21 +23,34 @@ namespace TaskSchedulerApp_2._0
     {        
         private readonly ITodoListRepository todoListRepository = new TodoService();
         private readonly IDealRepository dealRepository = new DealService();
-        private ToDoList? list = new();
+        private int ToDoListId = 0;
         private string title = null!;
         private List<Deal> deals = new();
         public DealsWindow(string title)
         {
             InitializeComponent();
 
-            list = todoListRepository.GetByName(title);
+            ToDoListId = todoListRepository.GetByName(title).Id;
             ToDoListLabel.Content = title;
-            DealsListBox.ItemsSource = dealRepository.ListAllByToDoList(title);
+            deals = dealRepository.ListAllByToDoList(title);
+
+            List<Deal> dealList = new List<Deal>();
+            foreach (var deal in deals)
+            {
+                dealList.Add(deal);
+            }
+
+            DealsGrid.ItemsSource = dealList;
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void CompletDealButton_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

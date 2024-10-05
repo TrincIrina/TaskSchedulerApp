@@ -20,6 +20,7 @@ namespace TaskSchedulerApp.Model
         // навигационные свойства
         public ToDoList? ToDoList { get; set; }     
         public List<Item> Items { get; set; } = [];
+
         public Deal()
         {
             Name = string.Empty;
