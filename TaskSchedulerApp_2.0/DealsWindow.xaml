@@ -29,14 +29,15 @@
                Style="{StaticResource FontStyle}"/>   
         
         <Grid>
-            <DataGrid x:Name="DealsGrid" AutoGenerateColumns="False" ItemsSource="{Binding}">                
+            <DataGrid x:Name="DealsGrid" AutoGenerateColumns="False" 
+                      FontFamily="Consolas" FontSize="18">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Id" Binding="{Binding Path=Id}" Visibility="Hidden" />
-                    <DataGridTextColumn Header="#" Binding="{Binding Path=IsDone}" />
-                    <DataGridHyperlinkColumn Header="Название" Binding="{Binding Path=Name}" />
-                    <DataGridTextColumn Header="Приоритет" Binding="{Binding Path=Priority}" />
-                    <DataGridTextColumn Header="Дата создания" Binding="{Binding Path=DateCreation}" />
-                    <DataGridTextColumn Header="Дедлайн" Binding="{Binding Path=Deadline}" />
+                    <DataGridCheckBoxColumn Header="#" Binding="{Binding Path=IsDone}" Width="50"/>
+                    <DataGridHyperlinkColumn Header="Название" Binding="{Binding Path=Name}" Width="300"/>
+                    <DataGridTextColumn Header="Приоритет" Binding="{Binding Path=Priority}" Width="100"/>
+                    <DataGridTextColumn Header="Дата создания" Binding="{Binding Path=DateCreation}" Width="200" />
+                    <DataGridTextColumn Header="Дедлайн" Binding="{Binding Path=Deadline}" Width="200"/>
                     <DataGridTextColumn Header="ToDoListId" Binding="{Binding Path=ToDoListId}" Visibility="Hidden" />
                     <DataGridTextColumn Header="Items" Binding="{Binding Path=Items}" Visibility="Hidden" />
                 </DataGrid.Columns>
@@ -57,7 +58,7 @@
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <Button x:Name="OpenDealButton" Content="Открыть чек-лист" 
                 Style="{StaticResource HeightWidthButton}"/>
-            <Button x:Name="CloseButton" Content="Выйти" 
+            <Button x:Name="CloseButton" Content="Вернуться" 
                 Style="{StaticResource HeightWidthButton}" Click="CloseButton_Click"/>
         </StackPanel>
     </StackPanel>

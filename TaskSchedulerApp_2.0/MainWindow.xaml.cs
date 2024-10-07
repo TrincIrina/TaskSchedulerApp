@@ -37,18 +37,16 @@ namespace TaskSchedulerApp_2._0
 
         private void EnterButton_Click(object sender, RoutedEventArgs e)
         {
-            EnterWindow enterWindow = new EnterWindow();
-            this.Hide();
-            enterWindow.ShowDialog();
-            this.Show();
+            EnterWindow enterWindow = new EnterWindow();            
+            enterWindow.Show();
+            Close();
         }
 
         private void RegistrationButton_Click(object sender, RoutedEventArgs e)
         {
-            RegistrationWindow registrationWindow = new RegistrationWindow();
-            this.Hide();
-            registrationWindow.ShowDialog();
-            this.Show();
+            RegistrationWindow registrationWindow = new RegistrationWindow();           
+            registrationWindow.Show();
+            Close();
         }
     }
 }

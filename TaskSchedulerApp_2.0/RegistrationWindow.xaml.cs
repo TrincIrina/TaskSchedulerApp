@@ -34,6 +34,8 @@ namespace TaskSchedulerApp_2._0
 
         private void СancelButton_Click(object sender, RoutedEventArgs e)
         {
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
             Close();
         }
 
@@ -50,10 +52,9 @@ namespace TaskSchedulerApp_2._0
                 };
                 userRepository.Add(user);
                 MessageBox.Show("Регистрация прошла успешно");
-                ToDoListsWindow toDoListsWindow = new ToDoListsWindow(login);
-                this.Hide();
-                toDoListsWindow.ShowDialog();
-                this.Show();
+                ToDoListsWindow toDoListsWindow = new ToDoListsWindow(login);                
+                toDoListsWindow.Show();
+                Close();
             } else
             {
                 MessageBox.Show("Неверно ввели пароль");
