@@ -11,7 +11,7 @@
     <Window.Resources>
         <Style x:Key="HeightWidthButton">
             <Setter Property="ItemsControl.Height" Value="40"/>
-            <Setter Property="ItemsControl.Width" Value="200"/>
+            <Setter Property="ItemsControl.Width" Value="250"/>
             <Setter Property="ItemsControl.Margin" Value="5"/>
             <Setter Property="ItemsControl.Foreground" Value="White"/>
             <Setter Property="ItemsControl.Background" Value="DimGray"/>
@@ -46,19 +46,20 @@
         
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">            
             <Button x:Name="AddDealButton" Content="Добавить дело" 
-                    Style="{StaticResource HeightWidthButton}" />
+                    Style="{StaticResource HeightWidthButton}" Click="AddDealButton_Click" />
             <Button x:Name="DeleteDealButton" Content="Удалить дело" 
-                    Style="{StaticResource HeightWidthButton}"/>
+                    Style="{StaticResource HeightWidthButton}" Click="DeleteDealButton_Click"/>
             <Button x:Name="EditDealButton" Content="Изменить дело" 
-                    Style="{StaticResource HeightWidthButton}"/>
-            <Button x:Name="CompletDealButton" Content="Отметить выполненным" 
-                    Style="{StaticResource HeightWidthButton}" Click="CompletDealButton_Click"/>            
+                    Style="{StaticResource HeightWidthButton}" Click="EditDealButton_Click"/>
+                       
         </StackPanel>
         
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button x:Name="OpenDealButton" Content="Открыть чек-лист" 
-                Style="{StaticResource HeightWidthButton}"/>
-            <Button x:Name="CloseButton" Content="Вернуться" 
+            <Button x:Name="OpenDealButton" Content="Открыть чек-лист" Background="Green"
+                Style="{StaticResource HeightWidthButton}" Click="OpenDealButton_Click"/>
+            <Button x:Name="CompletDealButton" Content="Отметить выполненным" 
+                Style="{StaticResource HeightWidthButton}" Click="CompletDealButton_Click"/>
+            <Button x:Name="CloseButton" Content="На главную" Background="Red"
                 Style="{StaticResource HeightWidthButton}" Click="CloseButton_Click"/>
         </StackPanel>
     </StackPanel>

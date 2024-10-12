@@ -146,11 +146,12 @@ namespace TaskSchedulerApp_2._0
                 }
                 else
                 {
-                    DealsWindow dealsWindow = new(title);
-                    this.Hide();
+                    DealsWindow dealsWindow = new(title, user.Login);
+                    //this.Hide();
                     dealsWindow.ShowDialog();
-                    this.Show();
-                    title = null!;
+                    //this.Show();
+                    //title = null!;
+                    Close();
                 }
             }
         }

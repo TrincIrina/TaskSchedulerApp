@@ -23,11 +23,12 @@ namespace TaskSchedulerApp.Model
 
         public Deal()
         {
-            Name = string.Empty;
+            Name = string.Empty;            
         }
         public override string ToString()
         {
             return $"{Name}. {Priority} - {DateCreation} - {Deadline}";
         }
+
     }
 }
