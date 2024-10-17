@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TaskSchedulerApp.Model;
 using TaskSchedulerApp.Repository;
 
 namespace TaskSchedulerApp_2._0
@@ -27,6 +28,25 @@ namespace TaskSchedulerApp_2._0
             InitializeComponent();
 
             ToDoListId = todoListId;
+        }
+
+        private void СancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            Deal deal = new Deal()
+            {
+                Name = NameTextBox.Text,
+                Priority = Convert.ToInt32(PriorityComboBox.SelectedItem),
+                DateCreation = DateTime.Now,
+                Deadline = (DateTime)DeadlainCalendar.SelectedDate
+                ToDoListId = ToDoListId,
+            };
+            dealRepository.Add(deal);
+            Close();
         }
     }
 }

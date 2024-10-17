@@ -5,25 +5,47 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TaskSchedulerApp_2._0"
         mc:Ignorable="d"
-        Title="AddEditDealWindow" Height="450" Width="800">
-    <StackPanel Orientation="Horizontal">
-        <StackPanel Orientation="Vertical">
-            <Label Content="Название дела:" Margin="5"/>
-            <Label Content="Приоритет дела:" Margin="5"/>
-            <Label Content="Дедлайн:" Margin="5"/>
-            <Button x:Name="SaveButton" Content="Сохранить" Margin="10"/>
+        Title="AddEditDealWindow" 
+        Height="360" MinHeight="360" MaxHeight="360" 
+        Width="530" MinWidth="520" MaxWidth="520">
+    <Window.Resources>
+        <Style x:Key="HeightWidthButton">
+            <Setter Property="ItemsControl.Height" Value="40"/>
+            <Setter Property="ItemsControl.Width" Value="230"/>
+            <Setter Property="ItemsControl.Margin" Value="5"/>
+            <Setter Property="ItemsControl.Foreground" Value="White"/>            
+            <Setter Property="Control.FontFamily" Value="Consolas"/>
+            <Setter Property="Control.FontSize" Value="20"/>
+        </Style>
+        <Style x:Key="FontStyle">
+            <Setter Property="Control.FontFamily" Value="Consolas"/>
+            <Setter Property="Control.FontSize" Value="20"/>
+        </Style>
+    </Window.Resources>
+    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel Orientation="Vertical" >
+                <Label Content="Название дела:" Margin="5" HorizontalContentAlignment="Right" Style="{StaticResource FontStyle}"/>
+                <Label Content="Приоритет дела:" Margin="5" HorizontalContentAlignment="Right" Style="{StaticResource FontStyle}"/>
+                <Label Content="Дедлайн:" Margin="5" HorizontalContentAlignment="Right" Style="{StaticResource FontStyle}"/>            
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Width="300">
+                <TextBox x:Name="NameTextBox" Margin="10"  Style="{StaticResource FontStyle}"/>
+                <ComboBox x:Name="PriorityComboBox" Margin="10" Style="{StaticResource FontStyle}">
+                    <TextBlock>1</TextBlock>
+                    <TextBlock>2</TextBlock>
+                    <TextBlock>3</TextBlock>
+                    <TextBlock>4</TextBlock>
+                    <TextBlock>5</TextBlock>
+                </ComboBox>
+                <Calendar x:Name="DeadlainCalendar" Margin="5"/>            
+            </StackPanel>        
         </StackPanel>
-        <StackPanel Orientation="Vertical">
-            <TextBox x:Name="NameTextBox" Margin="10"/>
-            <ComboBox x:Name="PriorityComboBox" Margin="10">
-                <TextBlock>1</TextBlock>
-                <TextBlock>2</TextBlock>
-                <TextBlock>3</TextBlock>
-                <TextBlock>4</TextBlock>
-                <TextBlock>5</TextBlock>
-            </ComboBox>
-            <Calendar x:Name="DeadlainCalendar" Margin="5"/>
-            <Button x:Name="СancelButton" Content="Отмена" Margin="10"/>
+        <StackPanel Orientation="Horizontal">
+            <Button x:Name="SaveButton" Content="Сохранить" Margin="10" Background="Green"
+                Style="{StaticResource HeightWidthButton}" Click="SaveButton_Click"/>
+            <Button x:Name="СancelButton" Content="Отмена" Margin="10" Background="Red"
+                Style="{StaticResource HeightWidthButton}" Click="СancelButton_Click"/>
         </StackPanel>
     </StackPanel>
 </Window>
