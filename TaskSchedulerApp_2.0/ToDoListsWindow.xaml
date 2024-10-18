@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TaskSchedulerApp_2._0"
         mc:Ignorable="d"
-        Title="ToDoListsWindow" 
+        Title="ToDoLists" Background="LightGoldenrodYellow"
         Height="400" MinHeight="400" MaxHeight="400"
         Width="700" MinWidth="700" MaxWidth="700">
     <Window.Resources>
@@ -21,16 +21,19 @@
         <Style x:Key="FontStyle">
             <Setter Property="Control.FontFamily" Value="Consolas"/>
             <Setter Property="Control.FontSize" Value="20"/>
+            <Setter Property="Control.Foreground" Value="DimGray"/>
         </Style>
     </Window.Resources>
     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Label x:Name="GreetingLabel" HorizontalContentAlignment="Center" FontStyle="Italic"
+        <Label x:Name="GreetingLabel" HorizontalContentAlignment="Center" FontStyle="Italic" FontSize="25"
                Style="{StaticResource FontStyle}"/>
         <StackPanel Orientation="Horizontal">
             <StackPanel Orientation="Vertical" Margin="5">
-                <ListBox x:Name="ToDoListBox" Width="300" Height="200" Style="{StaticResource FontStyle}"/>
-                <Label Content="Список задач:" Style="{StaticResource FontStyle}"/>
-                <TextBox x:Name="ToDoListTextBox" Width="300" Height="30" Style="{StaticResource FontStyle}"/>
+                <ListBox x:Name="ToDoListBox" Width="350" Height="200" Background="LightGoldenrodYellow"
+                         Style="{StaticResource FontStyle}"/>
+                <Label Content="Напишите название списка задач:" Style="{StaticResource FontStyle}"/>
+                <TextBox x:Name="ToDoListTextBox" Width="350" Height="30" Background="LightGoldenrodYellow" 
+                         Style="{StaticResource FontStyle}"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" VerticalAlignment="Center">
                 <Button x:Name="OpenListButton" Content="Открыть список" Style="{StaticResource HeightWidthButton}" Click="OpenListButton_Click"/>

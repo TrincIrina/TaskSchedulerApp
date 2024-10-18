@@ -40,10 +40,10 @@ namespace TaskSchedulerApp_2._0
             Deal deal = new Deal()
             {
                 Name = NameTextBox.Text,
-                Priority = Convert.ToInt32(PriorityComboBox.SelectedItem),
+                Priority = Convert.ToInt32(PriorityTextBox.Text),
                 DateCreation = DateTime.Now,
-                Deadline = (DateTime)DeadlainCalendar.SelectedDate
-                ToDoListId = ToDoListId,
+                Deadline = (DateTime)DeadlainCalendar.SelectedDate,
+                ToDoListId = ToDoListId
             };
             dealRepository.Add(deal);
             Close();

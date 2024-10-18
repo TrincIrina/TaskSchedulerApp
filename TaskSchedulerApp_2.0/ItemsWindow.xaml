@@ -5,8 +5,56 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TaskSchedulerApp_2._0"
         mc:Ignorable="d"
-        Title="ItemsWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="Сhecklist" Background="LightGoldenrodYellow"     
+        Height="400" MinHeight="400" MaxHeight="400"
+        Width="800" MinWidth="800" MaxWidth="800">
+    <Window.Resources>
+        <Style x:Key="HeightWidthButton">
+            <Setter Property="ItemsControl.Height" Value="45"/>
+            <Setter Property="ItemsControl.Width" Value="240"/>
+            <Setter Property="ItemsControl.Margin" Value="5"/>
+            <Setter Property="ItemsControl.Foreground" Value="White"/>
+            <Setter Property="ItemsControl.Background" Value="DimGray"/>
+            <Setter Property="Control.FontFamily" Value="Consolas"/>
+            <Setter Property="Control.FontSize" Value="20"/>
+        </Style>
+        <Style x:Key="FontStyle">
+            <Setter Property="Control.FontFamily" Value="Consolas"/>
+            <Setter Property="Control.FontSize" Value="20"/>
+            <Setter Property="Control.Foreground" Value="DimGray"/>
+        </Style>
+    </Window.Resources>
+    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" >
+        <Label x:Name="GreetingLabel" HorizontalContentAlignment="Center" FontStyle="Italic"
+           Style="{StaticResource FontStyle}" VerticalAlignment="Top"/>
+        <Grid>
+            <DataGrid x:Name="ItemsGrid" AutoGenerateColumns="False" Margin="10" 
+              FontFamily="Consolas" FontSize="18" Background="LightGoldenrodYellow">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id" Binding="{Binding Path=Id}" Visibility="Hidden" />
+                    <DataGridTextColumn Header="№" Binding="{Binding Path=Number}" Width="50"/>
+                    <DataGridTextColumn Header="Описание" Binding="{Binding Path=Description}" Width="650"/>
+                    <DataGridCheckBoxColumn Header="#" Binding="{Binding Path=IsDone}" Width="50"/>
+                    <DataGridTextColumn Header="DealId" Binding="{Binding Path=DealId}" Visibility="Hidden" />                    
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <Label Content="Введите описание пункта чек-листа:" Style="{StaticResource FontStyle}" Margin="5" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="DescriptionTextBox" Style="{StaticResource FontStyle}" Width="750" 
+                 Background="LightGoldenrodYellow" VerticalAlignment="Bottom"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" VerticalAlignment="Bottom">
+            <Button x:Name="AddDealButton" Content="Добавить пункт" 
+                    Style="{StaticResource HeightWidthButton}" Click="AddDealButton_Click" />
+            <Button x:Name="DeleteDealButton" Content="Удалить пункт" 
+                    Style="{StaticResource HeightWidthButton}" Click="DeleteDealButton_Click" />
+            <Button x:Name="EditDealButton" Content="Изменить пункт" 
+                    Style="{StaticResource HeightWidthButton}" Click="EditDealButton_Click" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" VerticalAlignment="Bottom">            
+            <Button x:Name="CompletDealButton" Content="Отметить выполненным" 
+                    Style="{StaticResource HeightWidthButton}" Click="CompletDealButton_Click"/>
+            <Button x:Name="CloseButton" Content="Вернуться к списку" Background="Red"
+                    Style="{StaticResource HeightWidthButton}" Click="CloseButton_Click"/>
+        </StackPanel>
+    </StackPanel>
 </Window>

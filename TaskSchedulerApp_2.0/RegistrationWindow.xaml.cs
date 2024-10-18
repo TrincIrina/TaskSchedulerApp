@@ -43,6 +43,17 @@ namespace TaskSchedulerApp_2._0
         {
             string login = LoginTextBox.Text;
             string password = PasswordBox.Password;
+            User? u = userRepository.FindByName(login);
+            if (u != null)
+            {
+                MessageBox.Show("Пользователь с таким логином уже существует");
+                return;
+            }
+            if (login == "" || password == "")
+            {
+                MessageBox.Show("Заполните все поля");
+                return;
+            }
             if (password == ReplayPasswordBox.Password)
             {
                 User user = new User()

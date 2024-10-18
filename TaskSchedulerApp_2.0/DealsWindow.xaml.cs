@@ -44,9 +44,9 @@ namespace TaskSchedulerApp_2._0
         private void AddDealButton_Click(object sender, RoutedEventArgs e)
         {
             AddDealWindow addDealWindow = new AddDealWindow(ToDoListId);
-            this.Hide();
+            //this.Hide();
             addDealWindow.ShowDialog();
-            this.Show();
+            //this.Show();
             // обновить список дел
             ListAllDeals();
         }
@@ -67,9 +67,9 @@ namespace TaskSchedulerApp_2._0
         private void EditDealButton_Click(object sender, RoutedEventArgs e)
         {
             EditDealWindow editDealWindow = new EditDealWindow((Deal)DealsGrid.SelectedItem);
-            this.Hide();
+            //this.Hide();
             editDealWindow.ShowDialog();
-            this.Show();
+            //this.Show();
             // обновить список дел
             ListAllDeals();
         }
@@ -80,6 +80,7 @@ namespace TaskSchedulerApp_2._0
             if (deal != null)
             {
                 dealRepository.IsDoneDeals(deal.Id);
+                //DealsGrid.DataGridCheckBoxColumn= true;
                 DealsGrid.Items.Refresh();
             } else
             {
@@ -89,7 +90,15 @@ namespace TaskSchedulerApp_2._0
         // открыть дело (чек-лист)
         private void OpenDealButton_Click(object sender, RoutedEventArgs e)
         {
-
+            Deal? deal = (Deal)DealsGrid.SelectedItem;
+            if (deal == null)
+            {
+                MessageBox.Show("Выберите дело для открытия");
+            }
+            ItemsWindow itemsWindow = new ItemsWindow(deal.Name, deal.Id);
+            this.Hide();
+            itemsWindow.ShowDialog();
+            this.Show();            
         }
         // закрыть окно списка дел, открыть окно со списками
         private void CloseButton_Click(object sender, RoutedEventArgs e)

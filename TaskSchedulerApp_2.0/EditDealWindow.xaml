@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TaskSchedulerApp_2._0"
         mc:Ignorable="d"
-        Title="EditDealWindow"
+        Title="Edit Deal" Background="LightGoldenrodYellow"
         Height="360" MinHeight="360" MaxHeight="360" 
-        Width="520" MinWidth="520" MaxWidth="520">
+        Width="570" MinWidth="570" MaxWidth="570">
     <Window.Resources>
         <Style x:Key="HeightWidthButton">
             <Setter Property="ItemsControl.Height" Value="40"/>
@@ -20,6 +20,7 @@
         <Style x:Key="FontStyle">
             <Setter Property="Control.FontFamily" Value="Consolas"/>
             <Setter Property="Control.FontSize" Value="20"/>
+            <Setter Property="Control.Foreground" Value="DimGray"/>
         </Style>
     </Window.Resources>
     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
@@ -29,16 +30,18 @@
                 <Label Content="Приоритет дела:" Margin="5" HorizontalContentAlignment="Right" Style="{StaticResource FontStyle}"/>
                 <Label Content="Дедлайн:" Margin="5" HorizontalContentAlignment="Right" Style="{StaticResource FontStyle}"/>
             </StackPanel>
-            <StackPanel Orientation="Vertical" Width="300">
-                <TextBox x:Name="NameTextBox" Margin="10"  Style="{StaticResource FontStyle}"/>
-                <ComboBox x:Name="PriorityComboBox" Margin="10" Style="{StaticResource FontStyle}">
+            <StackPanel Orientation="Vertical" Width="350">
+                <TextBox x:Name="NameTextBox" Margin="10" Background="LightGoldenrodYellow" 
+                         Style="{StaticResource FontStyle}"/>
+                <ComboBox x:Name="PriorityComboBox" Margin="10" Background="LightGoldenrodYellow" 
+                          Style="{StaticResource FontStyle}">
                     <TextBlock>1</TextBlock>
                     <TextBlock>2</TextBlock>
                     <TextBlock>3</TextBlock>
                     <TextBlock>4</TextBlock>
                     <TextBlock>5</TextBlock>
                 </ComboBox>
-                <Calendar x:Name="DeadlainCalendar" Margin="5"/>
+                <Calendar x:Name="DeadlainCalendar" Margin="5" Background="LightGoldenrodYellow"/>
             </StackPanel>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
