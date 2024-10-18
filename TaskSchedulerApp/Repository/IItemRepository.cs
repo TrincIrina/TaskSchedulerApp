@@ -20,7 +20,6 @@ namespace TaskSchedulerApp.Repository
         public Item? DeleteById(int id);
         // обновление записи
         public Item? Update(Item item);
-        //
-        public void IsDoneItems(int id);
+       
     }
 }

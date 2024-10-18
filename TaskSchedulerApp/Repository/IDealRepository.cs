@@ -20,7 +20,6 @@ namespace TaskSchedulerApp.Repository
         public Deal? DeleteById(int id);
         // обновление записи
         public Deal? Update(Deal deal);
-        //
-        public void IsDoneDeals(int id);
+        
     }
 }

@@ -22,21 +22,22 @@ namespace TaskSchedulerApp_2._0
     public partial class ItemsWindow : Window
     {
         private readonly IItemRepository itemRepository = new ItemService(); 
-        private List<Item> items = new List<Item>();
-        private int DealId;
+        private List<Item> items = [];        
+        private readonly int DealId;
         public ItemsWindow(string dealName, int dealId)
         {
             InitializeComponent();
-
-            GreetingLabel.Content = dealName;
+            // вывод названия чек-листа
+            GreetingLabel.Content = dealName;            
             DealId = dealId;
+            // вывод чек-листа
             ListAllItems();
         }
-        
-        private void AddDealButton_Click(object sender, RoutedEventArgs e)
+        // добавить пункт
+        private void AddItemButton_Click(object sender, RoutedEventArgs e)
         {
             string description = DescriptionTextBox.Text;
-            Item item = new Item()
+            Item item = new()
             {
                 Description = description,
                 DealId = DealId
@@ -44,8 +45,8 @@ namespace TaskSchedulerApp_2._0
             itemRepository.Add(item);
             ItemsGrid.Items.Add(item);
         }
-
-        private void DeleteDealButton_Click(object sender, RoutedEventArgs e)
+        // удалить пункт
+        private void DeleteItemButton_Click(object sender, RoutedEventArgs e)
         {
             Item item = (Item)ItemsGrid.SelectedItem;
             if (item != null)
@@ -58,8 +59,8 @@ namespace TaskSchedulerApp_2._0
                 MessageBox.Show("Выберите пункт для удаления");
             }
         }
-
-        private void EditDealButton_Click(object sender, RoutedEventArgs e)
+        // редактировать пункт
+        private void EditItemButton_Click(object sender, RoutedEventArgs e)
         {
             string description = DescriptionTextBox.Text;
             Item item = (Item)ItemsGrid.SelectedItem;
@@ -74,17 +75,17 @@ namespace TaskSchedulerApp_2._0
             }
             ListAllItems();
         }
-
-        private void CompletDealButton_Click(object sender, RoutedEventArgs e)
-        {
-            Item item = (Item)ItemsGrid.SelectedItem;
-            if (item != null)
-            {
-                itemRepository.IsDoneItems(item.Id);
-                ItemsGrid.Items.Refresh();
-            }
-        }
-
+        // завершить пункт
+        //private void CompletItemButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    Item item = (Item)ItemsGrid.SelectedItem;
+        //    if (item != null)
+        //    {
+        //        itemRepository.IsDoneItems(item.Id);
+        //        ItemsGrid.Items.Refresh();
+        //    }
+        //}
+        // закрыть окна чек-листа
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             Close();

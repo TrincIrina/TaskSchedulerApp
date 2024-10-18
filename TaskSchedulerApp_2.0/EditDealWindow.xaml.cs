@@ -22,25 +22,25 @@ namespace TaskSchedulerApp_2._0
     public partial class EditDealWindow : Window
     {
         private readonly IDealRepository dealRepository = new DealService();
-        private readonly Deal deal = new Deal();
+        private readonly Deal deal = new();
         public EditDealWindow(Deal d)
         {
             InitializeComponent();
 
             deal = d;
-
+            // заполнение полей из существующего дела
             NameTextBox.Text = deal.Name;
-            PriorityComboBox.SelectedItem = deal.Priority;
+            PriorityTextBox.Text = Convert.ToString(deal.Priority);
             DeadlainCalendar.SelectedDate = deal.Deadline;
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            Deal updatedDeal = new Deal()
+            Deal updatedDeal = new()
             {
                 Id = deal.Id,
                 Name = NameTextBox.Text,
-                Priority = Convert.ToInt32(PriorityComboBox.SelectedItem),
+                Priority = Convert.ToInt32(PriorityTextBox.Text),
                 DateCreation = deal.DateCreation,
                 Deadline = (DateTime)DeadlainCalendar.SelectedDate,
                 ToDoListId = deal.ToDoListId

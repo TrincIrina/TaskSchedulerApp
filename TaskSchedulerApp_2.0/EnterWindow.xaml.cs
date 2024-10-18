@@ -29,23 +29,24 @@ namespace TaskSchedulerApp_2._0
         {
             InitializeComponent();
         }
-
+        // Отмена - возврат в главное окно
         private void СancelButton_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();
+            MainWindow mainWindow = new();
             mainWindow.Show();
             Close();
         }
-
+        // Авторизация пользователя, открывает окно со списками
         private void EnterButton_Click(object sender, RoutedEventArgs e)
         {
             string login = LoginTextBox.Text;
             string password = PasswordBox.Password;
+            // Проверка логина и пароля
             if (userRepository.FindByName(login) != null)
             {
                 if (userRepository.FindByName(login).Password == password)
                 {
-                    ToDoListsWindow toDoListsWindow = new ToDoListsWindow(login);                    
+                    ToDoListsWindow toDoListsWindow = new(login);                    
                     toDoListsWindow.Show();
                     Close();
                 } else

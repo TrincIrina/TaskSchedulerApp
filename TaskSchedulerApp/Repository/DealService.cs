@@ -65,16 +65,6 @@ namespace TaskSchedulerApp.Repository
             }
             return updatedDeal;
         }
-
-        public void IsDoneDeals(int id)
-        {
-            using ApplicationDbContext db = new();
-            Deal? deal = GetById(id);
-            if (deal != null)
-            {
-                deal.IsDone = true;
-                db.SaveChanges();
-            }
-        }
+        
     }
 }

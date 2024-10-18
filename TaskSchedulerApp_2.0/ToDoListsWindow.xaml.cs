@@ -22,13 +22,16 @@ namespace TaskSchedulerApp_2._0
     public partial class ToDoListsWindow : Window
     {
         private readonly IUserRepository userRepository = new UserService();
-        private readonly ITodoListRepository todoListRepository = new TodoService();        
-        private User? user = new();
+        private readonly ITodoListRepository todoListRepository = new TodoService();
+        private List<ToDoList> lists = new(); // Список списков <ToDoList>
+        private readonly User? user = new();
         private string title = null!;
         
         public ToDoListsWindow(string login)
         {
             InitializeComponent();
+
+            lists = todoListRepository.ListAllByUser(login);
 
             user = userRepository.FindByName(login);
             Greeting();
@@ -52,7 +55,7 @@ namespace TaskSchedulerApp_2._0
                 GreetingLabel.Content = "Доброй ночи, " + user.Login + "!";
             }
         }
-        
+        // Метод для закрытия приложения
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show(
@@ -64,7 +67,7 @@ namespace TaskSchedulerApp_2._0
                 Close();
             }
         }
-
+        // Метод для добавления списка
         private void AddListButton_Click(object sender, RoutedEventArgs e)
         {
             title = ToDoListTextBox.Text;
@@ -82,7 +85,7 @@ namespace TaskSchedulerApp_2._0
             ToDoListBox.ItemsSource = todoListRepository.ListAllByUser(user.Login);
             title = null!;
         }
-
+        // Метод для удаления списка
         private void DeleteListButton_Click(object sender, RoutedEventArgs e)
         {
             title = ToDoListBox.SelectedItem.ToString();
@@ -98,7 +101,7 @@ namespace TaskSchedulerApp_2._0
                 title = null!;
             }            
         }
-
+        // Метод для редактирования списка
         private void EditListButton_Click(object sender, RoutedEventArgs e)
         {
             title = ToDoListBox.SelectedItem.ToString();
@@ -130,9 +133,10 @@ namespace TaskSchedulerApp_2._0
                 }
             }
         }
-
+        // Метод для открытия списка дел
         private void OpenListButton_Click(object sender, RoutedEventArgs e)
         {
+            int ToDoListId = 0;
             if (ToDoListBox.ItemsSource == null)
             {
                 MessageBox.Show("Список задач пуст");
@@ -140,13 +144,20 @@ namespace TaskSchedulerApp_2._0
             else
             {
                 title = ToDoListBox.SelectedItem.ToString();
+                foreach (ToDoList list in lists)
+                {
+                    if (list.Title == title)
+                    {
+                        ToDoListId = list.Id;
+                    }
+                }
                 if (title == null)
                 {
                     MessageBox.Show("Выберите список");
                 }
                 else
                 {
-                    DealsWindow dealsWindow = new(title, user.Login);                    
+                    DealsWindow dealsWindow = new(ToDoListId, user.Login);                    
                     dealsWindow.ShowDialog();                    
                     Close();
                 }

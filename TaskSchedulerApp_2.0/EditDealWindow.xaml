@@ -33,14 +33,9 @@
             <StackPanel Orientation="Vertical" Width="350">
                 <TextBox x:Name="NameTextBox" Margin="10" Background="LightGoldenrodYellow" 
                          Style="{StaticResource FontStyle}"/>
-                <ComboBox x:Name="PriorityComboBox" Margin="10" Background="LightGoldenrodYellow" 
-                          Style="{StaticResource FontStyle}">
-                    <TextBlock>1</TextBlock>
-                    <TextBlock>2</TextBlock>
-                    <TextBlock>3</TextBlock>
-                    <TextBlock>4</TextBlock>
-                    <TextBlock>5</TextBlock>
-                </ComboBox>
+                <TextBox x:Name="PriorityTextBox" Margin="10" Background="LightGoldenrodYellow" 
+                          Style="{StaticResource FontStyle}"/>
+                
                 <Calendar x:Name="DeadlainCalendar" Margin="5" Background="LightGoldenrodYellow"/>
             </StackPanel>
         </StackPanel>

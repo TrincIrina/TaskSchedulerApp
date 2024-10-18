@@ -64,16 +64,6 @@ namespace TaskSchedulerApp.Repository
             }
             return updatedItem;
         }
-        //
-        public void IsDoneItems(int id)
-        {
-            using ApplicationDbContext db = new();
-            Item? item = db.Items.FirstOrDefault(i => i.Id == id);
-            if (item != null)
-            {
-                item.IsDone = true;
-                db.SaveChanges();
-            }
-        }
+        
     }
 }

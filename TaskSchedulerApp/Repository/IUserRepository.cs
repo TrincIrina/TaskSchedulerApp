@@ -12,15 +12,12 @@ namespace TaskSchedulerApp.Repository
     {
         // добавление нового пользователя
         public User Add(User user);
-        // получение списка всех пользователей
-        public List<User> ListAll();
+        
         // получение пользователя по id
         public User? FindById(int id);
+
         // получение пользователя по имени
         public User? FindByName(string name);
-        // удаление пользователя
-        public User? DeleteByName(string name);
-        // обновление
-        public User? Update(User user);
+        
     }
 }

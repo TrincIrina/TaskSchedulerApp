@@ -22,6 +22,7 @@ namespace TaskSchedulerApp_2._0
     public partial class AddDealWindow : Window
     {
         private readonly IDealRepository dealRepository = new DealService();
+        // todoListId - идентификатор списка
         private int ToDoListId;
         public AddDealWindow(int todoListId)
         {
