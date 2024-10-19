@@ -55,7 +55,6 @@ namespace TaskSchedulerApp.Migrations
                     Priority = table.Column<int>(type: "int", nullable: false),
                     DateCreation = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Deadline = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsDone = table.Column<bool>(type: "bit", nullable: false),
                     ToDoListId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -76,7 +75,6 @@ namespace TaskSchedulerApp.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsDone = table.Column<bool>(type: "bit", nullable: false),
                     DealId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

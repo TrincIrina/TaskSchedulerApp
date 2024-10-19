@@ -40,19 +40,19 @@ namespace TaskSchedulerApp_2._0
         // Вспомогательный метод для вывода приветствия
         private void Greeting()
         {
-            DateTime now = DateTime.Now;
+            DateTime now = DateTime.Now.AddHours(10);
             if (now.Hour >= 6 && now.Hour <= 12)
             {
                 GreetingLabel.Content = "Доброе утро, " + user.Login + "!";
-            } else if (now.Hour > 12 && now.Hour < 17)
+            } else if (now.Hour > 12 && now.Hour < 18)
             {
                 GreetingLabel.Content = "Добрый день, " + user.Login + "!";
-            } else if (now.Hour >= 17 && now.Hour <= 21)
+            } else if (now.Hour >= 18 && now.Hour <= 22)
             {
                 GreetingLabel.Content = "Добрый вечер, " + user.Login + "!";
             } else
             {
-                GreetingLabel.Content = "Доброй ночи, " + user.Login + "!";
+                GreetingLabel.Content = user.Login + ", пора ложиться спать!";
             }
         }
         // Метод для закрытия приложения

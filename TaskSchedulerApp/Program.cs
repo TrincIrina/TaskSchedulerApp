@@ -201,7 +201,7 @@ deals = new()
     },
     new Deal()
     {
-        Name = "Записаться к парикмахеру и на маникюр",
+        Name = "Записаться к парикмахеру",
         Priority = 2,
         DateCreation = DateTime.Now,
         Deadline = DateTime.Now.AddDays(5),
@@ -233,26 +233,22 @@ int dealId = dealRepository.GetByName("Разобраться со счетам�
 List<Item> items = new()
 {
     new Item()
-    {
-        Number = 1,
+    {        
         Description = "Заплатить налоги",
         DealId = dealId,
     },
     new Item()
-    {
-        Number = 2,
+    {        
         Description = "Оплатить услги ЖКХ",
         DealId = dealId,
     },
     new Item()
-    {
-        Number = 3,
+    {        
         Description = "Раздать долги",
         DealId = dealId,
     },
     new Item()
-    {
-        Number = 4,
+    {        
         Description = "Спланировать бюджет на следущий год",
         DealId = dealId,
     },    
@@ -265,38 +261,32 @@ dealId = dealRepository.GetByName("Купить продукты").Id;
 items = new()
 {
     new Item()
-    {
-        Number = 1,
+    {       
         Description = "Сыр",
         DealId = dealId,
     },
     new Item()
-    {
-        Number = 2,
+    {        
         Description = "Творог",
         DealId = dealId,
     },
     new Item()
-    {
-        Number = 3,
+    {        
         Description = "Йогурт",
         DealId = dealId,
     },
     new Item()
-    {
-        Number = 4,
+    {        
         Description = "Спагетти",
         DealId = dealId,
     },
     new Item()
-    {
-        Number = 5,
+    {        
         Description = "Круветки",
         DealId = dealId,
     },
     new Item()
-    {
-        Number = 6,
+    {        
         Description = "вино полусухое белое",
         DealId = dealId,
     },

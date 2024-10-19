@@ -12,7 +12,7 @@ using TaskSchedulerApp.Model;
 namespace TaskSchedulerApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241001031724_Initial")]
+    [Migration("20241019071114_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -38,9 +38,6 @@ namespace TaskSchedulerApp.Migrations
 
                     b.Property<DateTime>("Deadline")
                         .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDone")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -73,9 +70,6 @@ namespace TaskSchedulerApp.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDone")
-                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 

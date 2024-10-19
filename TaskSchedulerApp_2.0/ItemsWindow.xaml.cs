@@ -31,29 +31,45 @@ namespace TaskSchedulerApp_2._0
             GreetingLabel.Content = dealName;            
             DealId = dealId;
             // вывод чек-листа
-            ListAllItems();
+            CheckListBox.Items.Clear();
+            // получить список дел
+            items = itemRepository.ListAllByDeal(DealId);
+            // вывести список дел
+            foreach (var item in items)
+            {
+                CheckListBox.Items.Add(item);
+            }
         }
         // добавить пункт
         private void AddItemButton_Click(object sender, RoutedEventArgs e)
-        {
+        {            
             string description = DescriptionTextBox.Text;
             Item item = new()
-            {
+            {                
                 Description = description,
                 DealId = DealId
             };
             itemRepository.Add(item);
-            ItemsGrid.Items.Add(item);
+            CheckListBox.Items.Add(item);            
+            DescriptionTextBox.Clear();
         }
         // удалить пункт
         private void DeleteItemButton_Click(object sender, RoutedEventArgs e)
         {
-            Item item = (Item)ItemsGrid.SelectedItem;
-            if (item != null)
+            string description = CheckListBox.SelectedItem.ToString();
+            if (CheckListBox.SelectedItem != null)
             {
-                itemRepository.DeleteById(item.Id);
-                ItemsGrid.Items.Remove(item);
-            }            
+                int id = 0;
+                foreach (var item in items)
+                {
+                    if (item.Description == description)
+                    {
+                        id = item.Id;
+                    }
+                }
+                itemRepository.DeleteById(id);
+                CheckListBox.Items.Remove(CheckListBox.SelectedItem);
+            }
             else
             {
                 MessageBox.Show("Выберите пункт для удаления");
@@ -62,46 +78,39 @@ namespace TaskSchedulerApp_2._0
         // редактировать пункт
         private void EditItemButton_Click(object sender, RoutedEventArgs e)
         {
-            string description = DescriptionTextBox.Text;
-            Item item = (Item)ItemsGrid.SelectedItem;
-            if (item != null)
-            {
-                item.Description = description;
+            string description = CheckListBox.SelectedItem.ToString();
+            if (CheckListBox.SelectedItem != null)
+            {                
+                int id = 0;
+                foreach (Item it in items)
+                {
+                    if (it.Description == description)
+                    {
+                        id = it.Id;
+                    }
+                }
+                description = DescriptionTextBox.Text;
+                Item item = new()
+                {
+                    Id = id,
+                    Description = description,
+                    DealId = DealId
+                };
                 itemRepository.Update(item);
+                CheckListBox.Items.Remove(CheckListBox.SelectedItem);
+                CheckListBox.Items.Add(item);
+                DescriptionTextBox.Clear();
             }
             else
             {
                 MessageBox.Show("Выберите пункт для редактирования");
-            }
-            ListAllItems();
-        }
-        // завершить пункт
-        //private void CompletItemButton_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Item item = (Item)ItemsGrid.SelectedItem;
-        //    if (item != null)
-        //    {
-        //        itemRepository.IsDoneItems(item.Id);
-        //        ItemsGrid.Items.Refresh();
-        //    }
-        //}
-        // закрыть окна чек-листа
+            }                   
+        }        
+        // закрыть окно чек-листа
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
-        // Вспомогательный метод для обновления чек-листа
-        private void ListAllItems()
-        {
-            ItemsGrid.Items.Clear();
-            // получить список дел
-            items = itemRepository.ListAllByDeal(DealId);
-            // вывести список дел
-            foreach (var item in items)
-            {
-                ItemsGrid.Items.Add(item);
-            }
-        }
-
+        
     }
 }

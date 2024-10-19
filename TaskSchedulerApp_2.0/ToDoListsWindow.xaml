@@ -29,10 +29,10 @@
                Style="{StaticResource FontStyle}"/>
         <StackPanel Orientation="Horizontal">
             <StackPanel Orientation="Vertical" Margin="5">
-                <ListBox x:Name="ToDoListBox" Width="350" Height="200" Background="LightGoldenrodYellow"
+                <ListBox x:Name="ToDoListBox" Width="400" Height="200" Background="LightGoldenrodYellow"
                          Style="{StaticResource FontStyle}"/>
                 <Label Content="Напишите название списка задач:" Style="{StaticResource FontStyle}"/>
-                <TextBox x:Name="ToDoListTextBox" Width="350" Height="30" Background="LightGoldenrodYellow" 
+                <TextBox x:Name="ToDoListTextBox" Width="400" Height="30" Background="LightGoldenrodYellow" 
                          Style="{StaticResource FontStyle}"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" VerticalAlignment="Center">

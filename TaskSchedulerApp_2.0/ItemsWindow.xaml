@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TaskSchedulerApp_2._0"
         mc:Ignorable="d"
-        Title="Сhecklist" Background="LightGoldenrodYellow"     
-        Height="700"  
-        Width="800" MinWidth="800" MaxWidth="800">
+        Title="Сhecklist" Background="LightGoldenrodYellow"
+        Height="600" MinHeight="600" MaxHeight="600"
+        Width="670" MinWidth="670" MaxWidth="670">
     <Window.Resources>
         <Style x:Key="HeightWidthButton">
             <Setter Property="ItemsControl.Height" Value="45"/>
-            <Setter Property="ItemsControl.Width" Value="240"/>
+            <Setter Property="ItemsControl.Width" Value="200"/>
             <Setter Property="ItemsControl.Margin" Value="5"/>
             <Setter Property="ItemsControl.Foreground" Value="White"/>
             <Setter Property="ItemsControl.Background" Value="DimGray"/>
@@ -20,29 +20,20 @@
         </Style>
         <Style x:Key="FontStyle">
             <Setter Property="Control.FontFamily" Value="Consolas"/>
-            <Setter Property="Control.FontSize" Value="20"/>
+            <Setter Property="Control.FontSize" Value="18"/>
             <Setter Property="Control.Foreground" Value="DimGray"/>
         </Style>
     </Window.Resources>
     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" >
-        <Label x:Name="GreetingLabel" HorizontalContentAlignment="Center" FontStyle="Italic"
-           Style="{StaticResource FontStyle}" VerticalAlignment="Top"/>
-        <Grid>
-            <DataGrid x:Name="ItemsGrid" AutoGenerateColumns="False" Margin="10" 
-              FontFamily="Consolas" FontSize="18" Background="LightGoldenrodYellow">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Id" Binding="{Binding Path=Id}" Visibility="Hidden" />
-                    <DataGridTextColumn Header="№" Binding="{Binding Path=Number}" Width="50"/>
-                    <DataGridTextColumn Header="Описание" Binding="{Binding Path=Description}" Width="650"/>
-                    <DataGridCheckBoxColumn Header="#" Binding="{Binding Path=IsDone}" Width="50"/>
-                    <DataGridTextColumn Header="DealId" Binding="{Binding Path=DealId}" Visibility="Hidden" />                    
-                </DataGrid.Columns>
-            </DataGrid>
-        </Grid>
-        <Label Content="Введите описание пункта чек-листа:" Style="{StaticResource FontStyle}" Margin="5" VerticalAlignment="Bottom"/>
-        <TextBox x:Name="DescriptionTextBox" Style="{StaticResource FontStyle}" Width="750" 
-                 Background="LightGoldenrodYellow" VerticalAlignment="Bottom"/>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" VerticalAlignment="Bottom">
+        <Label x:Name="GreetingLabel" HorizontalContentAlignment="Center" FontStyle="Italic" FontSize="20"
+               Style="{StaticResource FontStyle}" />
+        <ListBox x:Name="CheckListBox" Width="600" Height="300" Background="LightGoldenrodYellow"
+                 Style="{StaticResource FontStyle}"/>
+        <Label Content="Введите описание пункта чек-листа:" Style="{StaticResource FontStyle}" Margin="5" />
+        <TextBox x:Name="DescriptionTextBox" Style="{StaticResource FontStyle}" Width="600" 
+                 Background="LightGoldenrodYellow" />
+         
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" >
             <Button x:Name="AddItemButton" Content="Добавить пункт" 
                     Style="{StaticResource HeightWidthButton}" Click="AddItemButton_Click" />
             <Button x:Name="DeleteItemButton" Content="Удалить пункт" 
@@ -50,9 +41,8 @@
             <Button x:Name="EditItemButton" Content="Изменить пункт" 
                     Style="{StaticResource HeightWidthButton}" Click="EditItemButton_Click" />
         </StackPanel>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" VerticalAlignment="Bottom">            
-            
-            <Button x:Name="CloseButton" Content="Вернуться к списку" Background="Red"
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" >           
+            <Button x:Name="CloseButton" Content="Вернуться к списку" Background="Red" Width="240"
                     Style="{StaticResource HeightWidthButton}" Click="CloseButton_Click"/>
         </StackPanel>
     </StackPanel>
