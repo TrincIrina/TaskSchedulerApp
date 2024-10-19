@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -71,21 +72,8 @@ namespace TaskSchedulerApp_2._0
             // обновить список дел
             ListAllDeals();
         }
-        // завершить дело
-        //private void CompletDealButton_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Deal deal = (Deal)DealsGrid.SelectedItem;
-        //    if (deal != null)
-        //    {
-        //        dealRepository.IsDoneDeals(deal.Id);
-        //        //DealsGrid.DataGridCheckBoxColumn= true;
-        //        DealsGrid.Items.Refresh();
-        //    } else
-        //    {
-        //        MessageBox.Show("Выберите дело для завершения");
-        //    }
-        //}
-        // открыть дело (чек-лист)
+        
+        // открыть чек-лист
         private void OpenDealButton_Click(object sender, RoutedEventArgs e)
         {
             Deal? deal = (Deal)DealsGrid.SelectedItem;
@@ -111,15 +99,36 @@ namespace TaskSchedulerApp_2._0
             DealsGrid.Items.Clear();
             // получить список дел
             deals = dealRepository.ListAllByToDoList(title);
+            
             // вывести список дел
             foreach (var deal in deals)
             {
                 DealsGrid.Items.Add(deal);
             }
-            //ICollectionView cvDeals = CollectionViewSource.GetDefaultView(DealsGrid.ItemsSource);
-            
+            DealsGrid.Sorting += new DataGridSortingEventHandler(DealsGrid_Sorting);            
         }
 
+        private void DealsGrid_Sorting(object sender, DataGridSortingEventArgs e)
+        {
+            DataGridColumn column = e.Column;
+            // пользовательская сортировка по столбцу
+            if (column.SortMemberPath == "Приоритет")
+            {
+                // Предотвращение автоматической сортировки
+                e.Handled = true;
+
+                // направление сортировки
+                column.SortDirection = (column.SortDirection != ListSortDirection.Ascending)
+                    ? ListSortDirection.Ascending : ListSortDirection.Descending;
+
+                // компаратор
+                ListCollectionView lcv = (ListCollectionView)
+                    CollectionViewSource.GetDefaultView(DealsGrid.ItemsSource);
+                IComparer comparer = new MyComparer(column.SortDirection.Value);
+                lcv.CustomSort = comparer;
+            }
+        }
+        // вывести список дел на текущую дату
         private void DayDealsMenu_Click(object sender, RoutedEventArgs e)
         {
             DealsGrid.Items.Clear();
@@ -138,7 +147,7 @@ namespace TaskSchedulerApp_2._0
                 DealsGrid.Items.Add(deal);
             }
         }
-
+        // вывести список дел на текущую неделю
         private void WeekDealsMenu_Click(object sender, RoutedEventArgs e)
         {
             DealsGrid.Items.Clear();
@@ -158,7 +167,7 @@ namespace TaskSchedulerApp_2._0
                 DealsGrid.Items.Add(deal);
             }
         }
-
+        // вывести список дел на текущий месяц
         private void MonthDealsMenu_Click(object sender, RoutedEventArgs e)
         {
             DealsGrid.Items.Clear();
@@ -178,7 +187,7 @@ namespace TaskSchedulerApp_2._0
                 DealsGrid.Items.Add(deal);
             }
         }
-
+        // вывести весь список дел
         private void AllDealsMenu_Click(object sender, RoutedEventArgs e)
         {
             ListAllDeals();
