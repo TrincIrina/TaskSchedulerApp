@@ -10,8 +10,9 @@ namespace TaskSchedulerApp.Model
     public class Item
     {
         public int Id { get; set; }                 // первичный ключ
+        public int Number { get; set; }             // порядковый номер
         public string Description { get; set; }     // описание
-        public bool IsDone { get; set; } = false;   // выполнено
+        public bool IsDone { get; set; } = false;   // отметка о выполнении задачи
         public int DealId { get; set; }             // внешний ключ
 
         // навигационное свойство
@@ -22,7 +23,7 @@ namespace TaskSchedulerApp.Model
         }
         public override string ToString()
         {
-            return Description;
+            return $"{Number}. {Description}";
         }
     }
 }

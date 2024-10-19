@@ -14,7 +14,7 @@ namespace TaskSchedulerApp.Model
         public int Priority { get; set; }           // приоритет
         public DateTime DateCreation { get; set; }  // дата создания
         public DateTime Deadline { get; set; }      // дата, к которой дело должно быть выполнено
-        public bool IsDone { get; set; } = false;   // выполнено ли дело
+        public bool IsDone { get; set; } = false;   // отметка о выполнении пункта
         public int ToDoListId { get; set; }         // внешний ключ
 
         // навигационные свойства

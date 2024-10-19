@@ -14,6 +14,8 @@ namespace TaskSchedulerApp.Repository
         public Deal Add(Deal deal);
         // получение записи по id
         public Deal? GetById(int id);
+        // получение записи по названию
+        public Deal? GetByName(string title);
         // получение одного списка дел (всех записей с одинаковым вторичным ключём)
         public List<Deal> ListAllByToDoList(string title);
         // удаление записи по id

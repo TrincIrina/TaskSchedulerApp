@@ -24,6 +24,12 @@ namespace TaskSchedulerApp.Repository
             using ApplicationDbContext db = new();
             return db.Deals.FirstOrDefault(deal => deal.Id == id);
         }
+        // получение записи по названию
+        public Deal? GetByName(string title)
+        {
+            using ApplicationDbContext db = new();
+            return db.Deals.FirstOrDefault(deal => deal.Name == title);
+        }
         // получение одного списка дел (всех записей с одинаковым вторичным ключём)
         public List<Deal> ListAllByToDoList(string title)
         {
