@@ -37,36 +37,7 @@ namespace TaskSchedulerApp_2._0
             Greeting();
             ToDoListBox.ItemsSource = todoListRepository.ListAllByUser(user.Login);
         }
-        // Вспомогательный метод для вывода приветствия
-        private void Greeting()
-        {
-            DateTime now = DateTime.Now.AddHours(10);
-            if (now.Hour >= 6 && now.Hour <= 12)
-            {
-                GreetingLabel.Content = "Доброе утро, " + user.Login + "!";
-            } else if (now.Hour > 12 && now.Hour < 18)
-            {
-                GreetingLabel.Content = "Добрый день, " + user.Login + "!";
-            } else if (now.Hour >= 18 && now.Hour <= 22)
-            {
-                GreetingLabel.Content = "Добрый вечер, " + user.Login + "!";
-            } else
-            {
-                GreetingLabel.Content = user.Login + ", пора ложиться спать!";
-            }
-        }
-        // Метод для закрытия приложения
-        private void CloseButton_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBoxResult result = MessageBox.Show(
-                "Вы действительно хотите закрыть приложение?",
-                "Exit",
-                MessageBoxButton.YesNo);
-            if (result == MessageBoxResult.Yes)
-            {
-                Close();
-            }
-        }
+        
         // Метод для добавления списка
         private void AddListButton_Click(object sender, RoutedEventArgs e)
         {
@@ -137,30 +108,57 @@ namespace TaskSchedulerApp_2._0
         private void OpenListButton_Click(object sender, RoutedEventArgs e)
         {
             int ToDoListId = 0;
-            if (ToDoListBox.ItemsSource == null)
+            title = ToDoListBox.SelectedItem.ToString();
+            foreach (ToDoList list in lists)
             {
-                MessageBox.Show("Список задач пуст");
+                if (list.Title == title)
+                {
+                    ToDoListId = list.Id;
+                }
+            }
+            if (title == null)
+            {
+                MessageBox.Show("Выберите список");
             }
             else
             {
-                title = ToDoListBox.SelectedItem.ToString();
-                foreach (ToDoList list in lists)
-                {
-                    if (list.Title == title)
-                    {
-                        ToDoListId = list.Id;
-                    }
-                }
-                if (title == null)
-                {
-                    MessageBox.Show("Выберите список");
-                }
-                else
-                {
-                    DealsWindow dealsWindow = new(ToDoListId, user.Login);                    
-                    dealsWindow.ShowDialog();                    
-                    Close();
-                }
+                DealsWindow dealsWindow = new(ToDoListId, user.Login);                    
+                dealsWindow.ShowDialog();                    
+                Close();
+            }            
+        }
+
+        // Метод для закрытия приложения
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show(
+                "Вы действительно хотите закрыть приложение?",
+                "Exit",
+                MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                Close();
+            }
+        }
+        // Вспомогательный метод для вывода приветствия
+        private void Greeting()
+        {
+            DateTime now = DateTime.Now;
+            if (now.Hour >= 6 && now.Hour <= 12)
+            {
+                GreetingLabel.Content = "Доброе утро, " + user.Login + "!";
+            }
+            else if (now.Hour > 12 && now.Hour < 18)
+            {
+                GreetingLabel.Content = "Добрый день, " + user.Login + "!";
+            }
+            else if (now.Hour >= 18 && now.Hour <= 22)
+            {
+                GreetingLabel.Content = "Добрый вечер, " + user.Login + "!";
+            }
+            else
+            {
+                GreetingLabel.Content = user.Login + ", пора ложиться спать!";
             }
         }
     }

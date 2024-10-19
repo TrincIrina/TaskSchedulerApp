@@ -25,7 +25,7 @@
         </Style>
     </Window.Resources>
     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" >
-        <Label x:Name="GreetingLabel" HorizontalContentAlignment="Center" FontStyle="Italic" FontSize="20"
+        <Label x:Name="GreetingLabel" HorizontalContentAlignment="Center" FontWeight="Bold"  FontSize="20"
                Style="{StaticResource FontStyle}" />
         <ListBox x:Name="CheckListBox" Width="600" Height="300" Background="LightGoldenrodYellow"
                  Style="{StaticResource FontStyle}"/>

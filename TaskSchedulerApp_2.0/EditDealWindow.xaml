@@ -24,6 +24,7 @@
         </Style>
     </Window.Resources>
     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+        
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <StackPanel Orientation="Vertical" >
                 <Label Content="Название дела:" Margin="5" HorizontalContentAlignment="Right" Style="{StaticResource FontStyle}"/>

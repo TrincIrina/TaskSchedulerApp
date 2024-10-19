@@ -6,8 +6,8 @@
         xmlns:col="clr-namespace:System.Collections;assembly=mscorlib" xmlns:local="clr-namespace:TaskSchedulerApp.Model;assembly=TaskSchedulerApp" xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
         mc:Ignorable="d"
         Title="ToDoList" Background="LightGoldenrodYellow"    
-        Height="700" 
-        Width="1200" MinWidth="1200" MaxWidth="1200">
+        Height="550" 
+        Width="1000" MinWidth="1000" MaxWidth="1000">
     <Window.Resources>
         <Style x:Key="HeightWidthButton">
             <Setter Property="ItemsControl.Height" Value="40"/>
@@ -22,23 +22,17 @@
             <Setter Property="Control.FontFamily" Value="Consolas"/>
             <Setter Property="Control.FontSize" Value="20"/>
             <Setter Property="Control.Foreground" Value="DimGray"/>
-        </Style>
-        
-        
+        </Style>       
     </Window.Resources>
     
     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" >
         <Label x:Name="ToDoListLabel" HorizontalContentAlignment="Center" VerticalAlignment="Top"
-               Style="{StaticResource FontStyle}"/>
-        <Menu>
+               Style="{StaticResource FontStyle}" FontWeight="Bold"/>
+        <Menu FontFamily="Consolas" FontSize="15">
             <MenuItem Header="Меню">
-                <Button x:Name="AddDealButton" Content="Добавить дело" 
-                        Click="AddDealButton_Click" />
-                <Button x:Name="DeleteDealButton" Content="Удалить дело" 
-                        Click="DeleteDealButton_Click"/>
-                <Button x:Name="EditDealButton" Content="Изменить дело" 
-                        Click="EditDealButton_Click"/>
-                
+                <MenuItem x:Name="AddDealButton" Header="Добавить дело" Click="AddDealButton_Click" />
+                <MenuItem x:Name="DeleteDealButton" Header="Удалить дело" Click="DeleteDealButton_Click"/>
+                <MenuItem x:Name="EditDealButton" Header="Изменить дело" Click="EditDealButton_Click"/>                 
             </MenuItem>
             <MenuItem Header="Вид">
                 <MenuItem x:Name="DayDealsMenu" Header="Вывести дела на день" Click="DayDealsMenu_Click"/>
@@ -48,15 +42,14 @@
             </MenuItem>
         </Menu>
         <Grid>
-            <DataGrid x:Name="DealsGrid" AutoGenerateColumns="False"                       
+            <DataGrid x:Name="DealsGrid" AutoGenerateColumns="False" Height="400"                       
                       Background="LightGoldenrodYellow" FontFamily="Consolas" FontSize="18" >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Id" Binding="{Binding Path=Id}" Visibility="Hidden" />
-                    <DataGridCheckBoxColumn Header="#" Binding="{Binding Path=IsDone}" Width="50"/>
-                    <DataGridTextColumn Header="Название" Binding="{Binding Path=Name}" Width="400"/>
+                    <DataGridTextColumn Header="Id" Binding="{Binding Path=Id}" Visibility="Hidden" />                    
                     <DataGridTextColumn Header="Приоритет" Binding="{Binding Path=Priority}" Width="100"/>
-                    <DataGridTextColumn Header="Дата создания" Binding="{Binding Path=DateCreation}" Width="300" />
-                    <DataGridTextColumn Header="Дедлайн" Binding="{Binding Path=Deadline}" Width="300"/>
+                    <DataGridTextColumn Header="Название" Binding="{Binding Path=Name}" Width="400"/>
+                    <DataGridTextColumn Header="Дата создания" Binding="{Binding Path=DateCreation}" Width="230" />
+                    <DataGridTextColumn Header="Дедлайн" Binding="{Binding Path=Deadline}" Width="230"/>
                     <DataGridTextColumn Header="ToDoListId" Binding="{Binding Path=ToDoListId}" Visibility="Hidden" />
                     <DataGridTextColumn Header="Items" Binding="{Binding Path=Items}" Visibility="Hidden" />
                 </DataGrid.Columns>
