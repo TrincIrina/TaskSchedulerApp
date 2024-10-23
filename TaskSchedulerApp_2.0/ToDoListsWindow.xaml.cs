@@ -7,12 +7,14 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TaskSchedulerApp.Model;
 using TaskSchedulerApp.Repository;
+//using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace TaskSchedulerApp_2._0
 {
@@ -44,7 +46,7 @@ namespace TaskSchedulerApp_2._0
             title = ToDoListTextBox.Text;
             if (title == null)
             {
-                MessageBox.Show("Введите название списка");
+                System.Windows.MessageBox.Show("Введите название списка");
             }
             ToDoList list = new()
             {
@@ -53,7 +55,7 @@ namespace TaskSchedulerApp_2._0
             };
             todoListRepository.Add(list);
             ToDoListTextBox.Clear();
-            ToDoListBox.ItemsSource = todoListRepository.ListAllByUser(user.Login);
+            ToDoListBox.Items.Add(title);
             title = null!;
         }
         // Метод для удаления списка
@@ -62,13 +64,13 @@ namespace TaskSchedulerApp_2._0
             title = ToDoListBox.SelectedItem.ToString();
             if (title == null!)
             {
-                MessageBox.Show("Выберите список для удаления");
+                System.Windows.MessageBox.Show("Выберите список для удаления");
             }
             else
             {
                 int id = todoListRepository.GetByName(title).Id;
-                todoListRepository.DeleteById(id);                
-                ToDoListBox.ItemsSource = todoListRepository.ListAllByUser(user.Login);
+                todoListRepository.DeleteById(id);
+                ToDoListBox.Items.Remove(ToDoListBox.SelectedItem);                
                 title = null!;
             }            
         }
@@ -78,7 +80,7 @@ namespace TaskSchedulerApp_2._0
             title = ToDoListBox.SelectedItem.ToString();
             if (title == null!)
             {
-                MessageBox.Show("Выберите список для редактирования");
+                System.Windows.MessageBox.Show("Выберите список для редактирования");
             }
             else
             {
@@ -87,7 +89,7 @@ namespace TaskSchedulerApp_2._0
                 title = ToDoListTextBox.Text;
                 if (title == null)
                 {
-                    MessageBox.Show("Введите название списка");
+                    System.Windows.MessageBox.Show("Введите название списка");
                 }
                 else
                 {
@@ -118,7 +120,7 @@ namespace TaskSchedulerApp_2._0
             }
             if (title == null)
             {
-                MessageBox.Show("Выберите список");
+                System.Windows.MessageBox.Show("Выберите список");
             }
             else
             {
@@ -131,7 +133,7 @@ namespace TaskSchedulerApp_2._0
         // Метод для закрытия приложения
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show(
+            MessageBoxResult result = System.Windows.MessageBox.Show(
                 "Вы действительно хотите закрыть приложение?",
                 "Exit",
                 MessageBoxButton.YesNo);

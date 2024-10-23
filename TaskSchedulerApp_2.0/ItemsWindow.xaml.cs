@@ -31,14 +31,7 @@ namespace TaskSchedulerApp_2._0
             GreetingLabel.Content = dealName;            
             DealId = dealId;
             // вывод чек-листа
-            CheckListBox.Items.Clear();
-            // получить список дел
-            items = itemRepository.ListAllByDeal(DealId);
-            // вывести список дел
-            foreach (var item in items)
-            {
-                CheckListBox.Items.Add(item);
-            }
+            Print();
         }
         // добавить пункт
         private void AddItemButton_Click(object sender, RoutedEventArgs e)
@@ -97,8 +90,7 @@ namespace TaskSchedulerApp_2._0
                     DealId = DealId
                 };
                 itemRepository.Update(item);
-                CheckListBox.Items.Remove(CheckListBox.SelectedItem);
-                CheckListBox.Items.Add(item);
+                Print();
                 DescriptionTextBox.Clear();
             }
             else
@@ -111,6 +103,18 @@ namespace TaskSchedulerApp_2._0
         {
             Close();
         }
-        
+        // впсомогательный метод - вывод чек-листа
+        private void Print()
+        {
+            // вывод чек-листа
+            CheckListBox.Items.Clear();
+            // получить список дел
+            items = itemRepository.ListAllByDeal(DealId);
+            // вывести список дел
+            foreach (var item in items)
+            {
+                CheckListBox.Items.Add(item);
+            }
+        }
     }
 }
